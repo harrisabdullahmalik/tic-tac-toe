@@ -1,19 +1,26 @@
 document.addEventListener('DOMContentLoaded', main)
 
 function main() {
-    let player = 1;
+    let player = Math.ceil(Math.random() * 2); // User = 1 & Comp = 2
 
     let divs = document.getElementsByClassName('col-4');
     
     for (let div of divs) {
         div.onclick = () => {
-            if (player == 1) {
-                div.innerText = 'X';
-                player = 2;
-            } 
+            if (div.classList.contains('clicked')) {
+                alert('Already clicked');
+            }
             else {
-                div.innerHTML = '0';
-                player = 1;
+                if (player == 1) {
+                    div.innerText = 'X';
+                    div.classList.add('clicked');
+                    player = 2;
+                } 
+                else {
+                    div.innerHTML = '0';
+                    div.classList.add('clicked');
+                    player = 1;
+                }
             }
         };
     }
