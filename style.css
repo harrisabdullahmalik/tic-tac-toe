@@ -1,3 +1,20 @@
+#heading {
+    margin-top: 20px;
+    font-size: 100px;
+    text-align: center;
+}
+
+#player {
+    margin-top: 20px;
+    font-size: 45px;
+    text-align: center;
+}
+
+#winner {
+    margin-top: 10px;
+    text-align: center;
+}
+
 .col-4 {
     background-color: black;
     width: 100px;
@@ -10,5 +27,6 @@
 }
 
 .container {
-    margin: 100px 0 0 300px;
+    max-width: 350px;
+    margin-top: 50px;
 }
