@@ -61,6 +61,7 @@ function main() {
     let player_heading = document.getElementById('player');
     let divs = document.getElementsByClassName('col-4');
     let winner_message = document.getElementById("winner");
+    let blur_div = document.getElementById('to_be_blurred');
     let game_ended = false;
 
     player_heading.innerText = `Turn: Player ${player}`;
@@ -83,6 +84,8 @@ function main() {
                             winner_message.innerText = `Player ${player} won`;
                             player_heading.innerText = `Turn: --------`;
                             game_ended = true;
+                            winner_message.style.animationPlayState = 'running';
+                            blur_div.style.filter = 'blur(5px)';
                             return;
                         };
 
@@ -97,6 +100,8 @@ function main() {
                             winner_message.innerText = `Player ${player} won`;
                             game_ended = true;
                             player_heading.innerText = `Turn: --------`;
+                            winner_message.style.animationPlayState = 'running';
+                            blur_div.style.filter = 'blur(5px)';
                             return;
                         };
 
