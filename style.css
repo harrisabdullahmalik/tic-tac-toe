@@ -1,26 +1,52 @@
+@keyframes winner {
+    0% {
+        margin-top: 10px;
+        text-align: center;
+    }
+    100% {
+        margin-top: 0%;
+        text-align: center;
+        position: relative;
+        bottom: 350px;
+        font-size: 80px;
+        z-index: 1;
+    }
+}
+
+body {
+    background-color: #122620;
+}
+
 #heading {
+    color: #D6AD60;  /* Gold */
     margin-top: 20px;
     font-size: 100px;
     text-align: center;
 }
 
 #player {
+    color: #D6AD60;  /* Gold */
     margin-top: 20px;
     font-size: 45px;
     text-align: center;
 }
 
 #winner {
-    margin-top: 10px;
-    text-align: center;
+    color: #B68D40;  /* Tan */
+    position: relative;
+    bottom: 50px;
+    animation: winner;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    animation-play-state: paused;
 }
 
 .col-4 {
-    background-color: black;
+    background-color: #F4EBD0;  /* Cream */
     width: 100px;
     height: 100px;
     margin: 10px 0 0 10px;
-    color: white;
+    color: #D6AD60;  /* Gold */
     font-size: 60px;
     text-align: center;
     padding-top: 5px;
