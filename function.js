@@ -62,6 +62,7 @@ function main() {
     let divs = document.getElementsByClassName('col-4');
     let winner_message = document.getElementById("winner");
     let blur_div = document.getElementById('to_be_blurred');
+    let click_counter = 0;
     let game_ended = false;
 
     player_heading.innerText = `Turn: Player ${player}`;
@@ -107,6 +108,17 @@ function main() {
 
                         player = 1;
                         player_heading.innerText = `Turn: Player ${player}`;
+                    }
+                    
+                    click_counter++;
+
+                    if (click_counter === 9) {
+                        winner_message.innerText = `It's a draw`;
+                            player_heading.innerText = `Turn: --------`;
+                            game_ended = true;
+                            winner_message.style.animationPlayState = 'running';
+                            blur_div.style.filter = 'blur(5px)';
+                            return;
                     }
                 }
             }
