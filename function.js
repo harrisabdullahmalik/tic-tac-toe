@@ -120,6 +120,7 @@ function main() {
                             game_ended = true;
                             winner_message.style.animationPlayState = 'running';
                             blur_div.style.filter = 'blur(5px)';
+                            document.querySelector('body').style.height = "660px";  // to stop letting the body to overgrow
                             return;
                     }
                 }
