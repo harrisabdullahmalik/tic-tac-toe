@@ -56,8 +56,7 @@ function is_there_a_winner(divs) {
     return won;
 }
 
-function main() {
-    let player = Math.ceil(Math.random() * 2); // User = 1 & Comp = 2
+function multiplayer() {
     let player_heading = document.getElementById('player');
     let divs = document.getElementsByClassName('col-4');
     let winner_message = document.getElementById("winner");
@@ -65,8 +64,9 @@ function main() {
     let click_counter = 0;
     let game_ended = false;
 
+    let player = Math.ceil(Math.random() * 2); // User = 1 & Comp = 2
     player_heading.innerText = `Turn: Player ${player}`;
-    
+
     for (let div of divs) {
         div.onclick = () => {
             if (game_ended) {
@@ -129,4 +129,168 @@ function main() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', main);
+function singleplayer() {
+    let player_heading = document.getElementById('player');
+    let divs = document.getElementsByClassName('col-4');
+    let winner_message = document.getElementById("winner");
+    let blur_div = document.getElementById('to_be_blurred');
+    let game_ended = false;
+    let click_counter = 0;
+
+    let player = Math.ceil(Math.random() * 2); // User = 1 & Comp = 2
+    if (player === 1) {
+        player_heading.innerText = "Turn: User";
+    }
+    else {
+        player_heading.innerText = "Turn: Comp";
+    }
+
+    if (player === 2) {
+        setTimeout( function () {
+            col = Math.ceil(Math.random() * 9);
+        
+            while (divs[col - 1].classList.contains('clicked')) {
+                col = Math.ceil(Math.random() * 9);
+            }
+
+            divs[col - 1].innerHTML = '0';
+            divs[col - 1].classList.add('clicked');
+            click_counter++;
+            
+            if (is_there_a_winner(divs)) {
+                if (player === 1) {
+                    winner_message.innerText = "User won";
+                }
+                else {
+                    winner_message.innerText = "Comp won";
+                }
+                game_ended = true;
+                player_heading.innerText = `Turn: --------`;
+                winner_message.style.animationPlayState = 'running';
+                blur_div.style.filter = 'blur(5px)';
+                document.querySelector('body').style.height = "660px";  // to stop letting the body to overgrow
+                return;
+            }
+
+            player = 1;
+            player_heading.innerText = "Turn: User";
+        }, 1000);
+    }
+
+    function if_clicked () {
+        for (let div of divs) {
+            div.onclick = () => {
+                if (game_ended) {
+                    alert('Already finished');
+                }
+                else if (div.classList.contains('clicked')) {
+                    alert('Already clicked');
+                }
+                else if (player === 1) {
+                    user_clicked = true;
+                    div.innerText = 'X';
+                    div.classList.add('clicked');
+                    click_counter++;
+
+                    if (is_there_a_winner(divs)) {
+                        if (player === 1) {
+                            winner_message.innerText = "User won";
+                        }
+                        else {
+                            winner_message.innerText = "Comp won";
+                        }
+
+                        player_heading.innerText = `Turn: --------`;
+                        game_ended = true;
+                        winner_message.style.animationPlayState = 'running';
+                        blur_div.style.filter = 'blur(5px)';
+                        document.querySelector('body').style.height = "660px";  // to stop letting the body to overgrow
+                        return;
+                    };
+
+                    player = 2;
+                    player_heading.innerText = "Turn: Comp";
+                }
+                else {
+                    if_clicked();
+                }
+
+                // player 2
+                if (player === 2) {
+                    setTimeout( function () {
+                        col = Math.ceil(Math.random() * 9);
+
+                        while (divs[col - 1].classList.contains('clicked')) {
+                            col = Math.ceil(Math.random() * 9);
+                        }
+
+                        divs[col - 1].innerHTML = '0';
+                        divs[col - 1].classList.add('clicked');
+                        click_counter++;
+
+                        if (is_there_a_winner(divs)) {
+                            if (player === 1) {
+                                winner_message.innerText = "User won";
+                            }
+                            else {
+                                winner_message.innerText = "Comp won";
+                            }
+                            game_ended = true;
+                            player_heading.innerText = `Turn: --------`;
+                            winner_message.style.animationPlayState = 'running';
+                            blur_div.style.filter = 'blur(5px)';
+                            document.querySelector('body').style.height = "660px";  // to stop letting the body to overgrow
+                            return;
+                        }
+
+                        player = 1;
+                        player_heading.innerText = "Turn: User";
+                    }, 1000);
+
+                    console.log(click_counter);
+                    if (click_counter === 9) {
+                        console.log('Draw');
+                        winner_message.innerText = "It's a draw";
+                        game_ended = true;
+                        player_heading.innerText = "Turn: --------";
+                        winner_message.style.animationPlayState = 'running';
+                        blur_div.style.filter = 'blur(5px)';
+                        document.querySelector('body').style.height = "660px";  // to stop letting the body to overgrow
+                        return;
+                    }
+                }
+            };
+        }
+
+        if (game_ended) {
+            console.log('true');
+        }
+    }
+
+    if_clicked();
+}
+
+function homepage() {
+    let singleplayer_div = document.getElementById('sp');
+    let multiplayer_div = document.getElementById('mp');
+    let game = document.getElementById('game');
+    let selection = document.getElementById('selection');
+    
+    game.style.display = 'none';
+
+    singleplayer_div.onclick = () => {
+        selection.style.display = 'none';
+        game.style.display = 'block';
+
+        singleplayer();
+    }
+
+    multiplayer_div.onclick = () => {
+        selection.style.display = 'none';
+        game.style.display = 'block';
+
+        multiplayer();
+    }
+}
+
+document.addEventListener('DOMContentLoaded', homepage);
