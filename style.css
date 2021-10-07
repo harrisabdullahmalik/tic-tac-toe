@@ -14,7 +14,7 @@
 }
 
 body {
-    background-color: #122620;
+    background-color: #122620;  /* Dark Green */
 }
 
 #heading {
@@ -39,6 +39,33 @@ body {
     animation-duration: 2s;
     animation-fill-mode: forwards;
     animation-play-state: paused;
+}
+
+#sp, #mp {
+    background-color: #D6AD60; /* Gold */
+    color: #122620;  /* Dark Green */
+    font-size: 50px;
+    font-weight: bold;
+    height: 120px;
+    width: 350px;
+    border-radius: 20px;
+}
+
+#sp:hover, #mp:hover {
+    background-color: #B68D40; /* Tan */
+}
+
+#sp {
+    padding: 20px 0 0 15px;
+    position: relative;
+    top: 120px;
+    left: 300px;
+}
+
+#mp {
+    padding: 20px 0 0 35px;
+    position: relative;
+    left: 700px;
 }
 
 .col-4 {
